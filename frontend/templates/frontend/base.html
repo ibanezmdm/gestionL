@@ -22,14 +22,14 @@
 
   </head>
   <body 
-    {% block body_class %} class="hold-transition layout-top-nav" {% endblock body_class %} 
+    {% block body_class %} class="hold-transition layout-top-nav-fixed layout-top-nav" {% endblock body_class %} 
     {% block body_style %} style="height: auto;" {% endblock body_style %}>
     <div class="wrapper">
 
       <!-- Navbar -->
       <nav {% block navbar_class %} class="main-header navbar navbar-expand-xl navbar-dark" {% endblock navbar_class %} >
       {% block navbar %}
-        <div class="container">
+        <div class="container-fluid">
 
           {% block navbar_brad %}
           <span class="navbar-brand">
