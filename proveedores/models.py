@@ -11,9 +11,9 @@ class TimestampModel(models.Model):
 
 
 class Proveedor(TimestampModel):
-	id = models.IntegerField(primary_key = True)
-	codigo = models.IntegerField(unique = True)
-	rut = models.IntegerField(unique = True)
+	id_dwh = models.IntegerField(unique = True)
+	codigo_pmm = models.IntegerField(unique = True)
+	rut = models.IntegerField(primary_key = True)
 	razon_social = models.CharField(max_length = 50)
 
 	class Meta:
