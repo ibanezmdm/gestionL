@@ -1,0 +1,137 @@
+{% extends 'colaboracion/base.html' %}
+{% load static %}	
+
+
+{% block content %}
+<div class="row">
+	<div class="col-8">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title"><strong>Proveedor:</strong> <em>{{ colaborador.proveedor.rut }}</em> - {{ colaborador|title }} </h3>
+				<div class="card-tools">
+					<buttom type="button" class="btn btn-primary btn-sm" id="addModalBtn" data-toggle="modal" data-target="#addModal" data-url="{% url 'colaboracion:proveedor' colaborador.proveedor.rut %}">
+						<i class="fas fa-plus-circle"></i> Agregar
+					</buttom>
+				</div>
+			</div>
+			<div class="card-body">
+				<h6>Destinatarios</h6>
+				<table id="destinatario" class="table table-bordered table-striperd table-sm">
+					<thead>
+						<tr>
+							<th>Correo</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Tipo</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					{% if colaborador.contactoproveedor_set.all %}
+					<tbody>
+						{% for contacto in colaborador.contactoproveedor_set.all %}
+						<tr>
+							<td><a href=" {% url 'colaboracion:prov_contact_edit' colaborador.proveedor.rut contacto.email %} ">{{ contacto.email }}</a></td>
+							<td>{{ contacto.nombre }}</td>
+							<td>{{ contacto.apellido }}</td>
+							<td>{{ contacto.en_copia|yesno:"En copia," }}</td>
+							<td>
+								<a href="{% url 'colaboracion:prov_contact_edit' colaborador.proveedor.rut contacto.email %}" class="btn btn-warning btn-xs">
+									<i class="fas fa-edit"></i> editar 
+								</a>
+								<buttom type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteModal" data-email="{{ contacto.email }}" data-proveedor="{{ colaborador.proveedor|title }}" data-url="{% url 'colaboracion:prov_contact_delete' colaborador.proveedor.rut contacto.email %}">
+									<i class="fas fa-trash"></i> quitar 
+								</buttom>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+					{% endif %}
+				</table>
+				<!-- Delete Modal -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="deleteModalLabel">Quitar Registro</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								...
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+								<a href="#" id="deleteModalBtn" class="btn btn-danger btn-sm">Quitar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Add Modal -->
+				<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="deleteModalLabel">Añadir nuevo contacto</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label for="contact-email" class="control-label">Correo:</label>
+										<input type="email" class="form-control" id="contact-email">
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+								<a href="#" id="addModalBtnUrl" class="btn btn-primary btn-sm">Añadir</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a href=" {% url 'colaboracion:index' %} ">Atras</a>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+<script>
+	// Modifica la url del boton Quitar que se encuentra dentro del model delete
+	$('#deleteModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var email = button.data('email')
+		var proveedor = button.data('proveedor')
+		var url = button.data('url')
+		var modal = $(this)
+		modal.find('.modal-body').text('Esta seguro de quitar a: ' + email + ' de la lista: ' + proveedor)
+		modal.find('#deleteModalBtn').attr("href", url)
+	})
+</script>
+
+<script>
+	// Modifica la url del boton Quitar que se encuentra dentro del model delete
+	$('#addModal').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var url = button.data('url')
+		var modal = $(this)
+		modal.find('#addModalBtnUrl').attr("href", url)
+	})
+</script>
+
+<script>
+$('#addModalBtnUrl').click(function() {
+	var email = $('#contact-email').val()
+	var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+	if (!regex.test(email)){
+		alert("La dirección de email es incorrecta.");
+	} else {
+		var url = $('#addModalBtnUrl').attr("href") + email + '/add'
+		$('#addModalBtnUrl').attr("href", url)
+	}
+})
+</script>
+{% endblock extra_js %}

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'img/tottus.ico' %}">
     
     {% block title_outer %}
     <title> {% block title %} {{ site_name }} {% endblock title %} </title>
@@ -22,7 +23,7 @@
 
   </head>
   <body 
-    {% block body_class %} class="hold-transition layout-top-nav-fixed layout-top-nav" {% endblock body_class %} 
+    {% block body_class %} class="hold-transition layout-navbar-fixed layout-footer-fixed layout-top-nav" {% endblock body_class %} 
     {% block body_style %} style="height: auto;" {% endblock body_style %}>
     <div class="wrapper">
 
@@ -42,7 +43,10 @@
             <ul class="navbar-nav">
             {% block navbar_left_links %}
               <li class="nav-item">
-                <a href=" {% url 'index' %} " class="nav-link">Home</a>
+                <a href=" {% url 'gestiondesarrollo:index' %} " class="nav-link">Home</a>
+              </li>
+              <li>
+                <a href=" {% url 'colaboracion:index' %} " class="nav-link">Colaboracion</a>
               </li>
             {% endblock navbar_left_links %}
             </ul>
@@ -66,14 +70,15 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0 text-dark">{% block content_title %}Titulo de contenido{% endblock content_title %}<small>{% block content_title_small %}{% endblock content_title_small %}</small>
+                <h1 class="m-0 text-dark">{% block content_title %} ¡Bienvenido {% endblock content_title %}<small>{% block content_title_small %} al portal de aplicaciones Desarrollo Logistico! {% endblock content_title_small %}</small>
                 </h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   {% block breadcrumb %}
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Starter Page</li>
+                  <!-- TODO: Generar breadcrumb de forma automatica -->
+                  <li class="breadcrumb-item active"><a href="{% url 'gestiondesarrollo:index' %}"> Home </a></li>
+                  <!--<li class="breadcrumb-item active">Starter Page</li>-->
                   {% endblock breadcrumb %}
                 </ol>
               </div><!-- /.col -->
@@ -86,6 +91,46 @@
         <div class="content">
           <div class="container-fluid">
           {% block content %}
+          <!-- TODO: Generar pestañas de aplicaciones de forma automatica -->
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="small-box bg-gray">
+                  <div class="inner">
+                    <h3> Colaboración </h3>
+                    <p> Mantención de correos </p>
+                  </div>
+                  <a href="{% url 'colaboracion:index' %}" class="small-box-footer">
+                    ir a la aplicacion <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3> Sugerido FFVV </h3>
+                    <p> FFVV Servidor 201 </p>
+                  </div>
+                  <a href="http://10.195.254.201:8082/log.aspx" class="small-box-footer">
+                    ir a la aplicacion <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3> Sugerido FFVV </h3>
+                    <p> FFVV Servidor 177 </p>
+                  </div>
+                  <a href="http://10.195.254.180:8081/log.aspx" class="small-box-footer">
+                    ir a la aplicacion <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
           {% endblock content %}
           </div><!-- /.container-fluid -->
         </div>

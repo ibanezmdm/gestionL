@@ -1,0 +1,12 @@
+{% extends 'frontend/base.html' %}
+{% load static %}	
+
+{% block content_title %} Portal Colaboracion Proveedores {% endblock content_title %}
+{% block content_title_small %} {% endblock content_title_small %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><a href="{% url 'gestiondesarrollo:index' %}">Home</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'colaboracion:index' %}">Colaboracion</a></li>
+{% endblock breadcrumb %}
+
+{% block content %}  {% endblock content %}

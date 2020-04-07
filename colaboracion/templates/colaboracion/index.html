@@ -1,0 +1,55 @@
+{% extends 'colaboracion/base.html' %}
+{% load static %}	
+
+{% block css %}{% include 'frontend/_dataTables_css.html' %}{% endblock css %}
+
+{% block content %}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title"> Lista de proveedores en colaboracion </h3>
+			</div>
+			<div class="card-body">
+				{% if colaborador_list %}
+				<table id="datatable" class="table table-bordered table-striperd table-sm">
+					<thead>
+						<tr>
+							<th>Rut</th>
+							<th>Razon Social</th>
+							<th>Estado</th>
+							<th>Destinatarios</th>
+							<th>Copias</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for colaborador in colaborador_list %}
+						<tr>
+							<td> <a href="{% url 'colaboracion:proveedor' colaborador.proveedor.rut %}"> {{ colaborador.proveedor.rut }} </a></td>
+							<td> {{ colaborador|lower|capfirst }} </td>
+							<td> {{ colaborador.estado|yesno:"Activo,Inactivo" }} </td>
+							<td> {{ colaborador.contactoproveedor_set.destinatarios_list|truncatechars:"50" }} </td>
+							<td> {{ colaborador.contactoproveedor_set.en_copia_list|truncatechars:"50" }} </td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+					<p>No hay registros en la base de datos</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+{% block js %}
+	{% include 'frontend/_dataTables_js.html' %}
+
+	<script>
+		<!-- jQuery para datatable -->
+		$(document).ready(function () {
+			$('#datatable').DataTable();
+		});
+	</script>
+{% endblock js %}
