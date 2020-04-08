@@ -149,3 +149,7 @@ media
 
 # Carpeta Visual Studio Code
 .vscode/
+
+
+# Archivos de configuracion en produccion
+web.config
