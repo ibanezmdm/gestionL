@@ -22,4 +22,5 @@ urlpatterns = [
     path('', RedirectView.as_view(pattern_name='gestiondesarrollo:index', permanent=False)),
     path('gestiondesarrollo/', include('frontend.urls')),
     path('colaboracion/', include('colaboracion.urls')),
+    path('accounts/', include('registration.urls')),
 ]

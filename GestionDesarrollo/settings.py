@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['{}'.format(settings['HOST'])]
 # Application definition
 
 INSTALLED_APPS = [
+    'registration.apps.RegistrationConfig',
     'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,3 +143,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+
+# REGISTRATION CONFIG
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'

@@ -1,0 +1,53 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+	<div class="card-body login-card-body">
+		<p class="login-box-msg">Iniciar sesión</p>
+		{% if form.errors %}
+		{% for key, value in form.errors.items %}
+		<div class="card bg-danger">
+			<div class="card-header">
+				<h3 class="card-title">Error</h3>
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				{{ value }}
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+		<form action="" method="post"> {% csrf_token %}
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" placeholder="usuario" name="username" required id="id_username">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-envelope"></span>
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<input type="password" class="form-control" placeholder="Contraseña" name="password" required id="id_password">
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<span class="fas fa-lock"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-8"></div>
+				<!-- /.col -->
+				<div class="col-4">
+					<input type="submit" class="btn btn-primary btn-block" value='Ingresar'>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+	</div>
+	<!-- /.login-card-body -->
+</div>
+{% endblock content %}

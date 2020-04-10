@@ -55,9 +55,21 @@
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           {% block navbar_rigth_links %}
-            {% comment %} <li class="nav-item">
-              <a href="#" class="nav-link">Ingresar</a>
-            </li> {% endcomment %}
+            {% if user.is_authenticated %}
+            <li class="user">
+              <a href="#" class="nav-link disabled"> {{ user.get_full_name }} </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'accounts:password_change' %}" class="nav-link">Cambiar Contraseña</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'accounts:logout' %}?next={{ request.path }}" class="nav-link">Salir</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="nav-link">Ingresar</a>
+            </li>
+            {% endif %}
           {% endblock navbar_rigth_links %}
           </ul>
 
