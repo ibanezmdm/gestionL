@@ -1,14 +1,23 @@
 {% extends 'colaboracion/base.html' %}
 {% load static %}	
+{% load filters %}
 
-{% block css %}{% include 'frontend/_dataTables_css.html' %}{% endblock css %}
+{% block css %}{% include 'frontend/_dataTables_css.html' %}
+<link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">{% endblock css %}
 
 {% block content %}
 <div class="row">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title"> Lista de proveedores en colaboracion </h3>
+				<h3 class="card-title"> Lista de proveedores en colaboración </h3>
+				{% if user|has_group:"administrador" or user.is_superuser %}
+				<div class="card-tools">
+					<buttom type="button" class="btn btn-primary btn-sm" id="newColaboradorModalBtn" data-toggle="modal" data-target="#newColaboradorModal">
+						<i class="fas fa-plus-circle"> </i> Agregar proveedor
+					</buttom>
+				</div>
+				{% endif %}
 			</div>
 			<div class="card-body">
 				{% if colaborador_list %}
@@ -16,7 +25,7 @@
 					<thead>
 						<tr>
 							<th>Rut</th>
-							<th>Razon Social</th>
+							<th>Razón Social</th>
 							<th>Estado</th>
 							<th>Destinatarios</th>
 							<th>Copias</th>
@@ -41,15 +50,23 @@
 		</div>
 	</div>
 </div>
+{% include 'colaboracion/_colaboradorForm.html' %}
 {% endblock content %}
 
 {% block js %}
 	{% include 'frontend/_dataTables_js.html' %}
+	<script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
 
 	<script>
 		<!-- jQuery para datatable -->
 		$(document).ready(function () {
 			$('#datatable').DataTable();
+		});
+	</script>
+
+	<script>
+		$('.select2AddColaborador').select2({
+			width: "resolve"
 		});
 	</script>
 {% endblock js %}
