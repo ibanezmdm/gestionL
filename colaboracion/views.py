@@ -4,20 +4,25 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import Colaborador, ContactoProveedor
-from .forms import ContactoProveedorForm
+from .forms import ContactoProveedorForm, ColaboradorForm
 
 
 # Create your views here.
 
-class IndexColaboracionView(generic.ListView):
-	template_name = "colaboracion/index.html"
+class IndexColaboracionView(generic.CreateView):
 	model = Colaborador
-	
+	template_name = "colaboracion/index.html"
+	form_class = ColaboradorForm
+
 	# TODO: Generera variables de contexto de forma automatica
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['site_name'] = 'Gestion | Colaboracion'
+		context["colaborador_list"] = self.model.objects.all()
 		return context
+	
+	def get_success_url(self):
+		return reverse_lazy('colaboracion:proveedor', kwargs={'pk': self.object.pk})
 
 
 class DetalleProveedorView(generic.DeleteView):

@@ -28,7 +28,7 @@
     <div class="wrapper">
 
       <!-- Navbar -->
-      <nav {% block navbar_class %} class="main-header navbar navbar-expand-md navbar-dark" {% endblock navbar_class %} >
+      <nav  class="{% block navbar_class %} main-header navbar navbar-expand-md navbar-dark {% endblock navbar_class %}">
       {% block navbar %}
         <div class="container-fluid">
 
@@ -46,7 +46,7 @@
                 <a href=" {% url 'gestiondesarrollo:index' %} " class="nav-link">Home</a>
               </li>
               <li>
-                <a href=" {% url 'colaboracion:index' %} " class="nav-link">Colaboracion</a>
+                <a href=" {% url 'colaboracion:index' %} " class="nav-link">Colaboración</a>
               </li>
             {% endblock navbar_left_links %}
             </ul>
@@ -55,9 +55,21 @@
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           {% block navbar_rigth_links %}
-            {% comment %} <li class="nav-item">
-              <a href="#" class="nav-link">Ingresar</a>
-            </li> {% endcomment %}
+            {% if user.is_authenticated %}
+            <li class="user">
+              <a href="#" class="nav-link disabled"> {{ user.get_full_name }} </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'accounts:password_change' %}" class="nav-link">Cambiar Contraseña</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'accounts:logout' %}?next={{ request.path }}" class="nav-link">Salir</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="nav-link">Ingresar</a>
+            </li>
+            {% endif %}
           {% endblock navbar_rigth_links %}
           </ul>
 
@@ -73,7 +85,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0 text-dark">{% block content_title %} ¡Bienvenido {% endblock content_title %}<small>{% block content_title_small %} al portal de aplicaciones Desarrollo Logistico! {% endblock content_title_small %}</small>
+                <h1 class="m-0 text-dark">{% block content_title %} ¡Bienvenido {% endblock content_title %}<small>{% block content_title_small %} al portal de aplicaciones Desarrollo Logístico! {% endblock content_title_small %}</small>
                 </h1>
               </div><!-- /.col -->
               <div class="col-sm-6">
@@ -147,12 +159,12 @@
         {% block footer %}
         <div class="float-right d-none d-sm-inline">
           {% block footer_right %}
-          Gerencia Desarrollo Logistico - Gestion de Informacion
+          Gerencia Desarrollo Logístico - Gestión de Información
           {% endblock footer_right %}
         </div>
         <!-- Default to the left -->
         {% block footer_left %}
-        <strong>Correo de soporte: <a href="mailto:desarrollo.logistico.tottus@falabella.cl"> desarrollo.logistico.tottus@falabella.cl </a> </strong>
+        <strong>Correo de soporte: <a href="mailto:desarrollo.logistico.tottus@falabella.cl"> secornejob@tottus.cl </a> </strong>
         {% endblock footer_left %}
         {% endblock footer %}
       </footer>

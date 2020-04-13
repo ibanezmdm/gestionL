@@ -23,3 +23,16 @@ class ContactoProveedorForm(forms.ModelForm):
 			'email': forms.EmailInput(attrs={'class': 'form-control form-control-sm'}),
 			'en_copia': forms.CheckboxInput(attrs={'class': 'form-control-sm'}),
 		}
+
+
+class ColaboradorForm(forms.ModelForm):
+
+	class Meta:
+		model = Colaborador
+		fields = ['proveedor']
+		labels = {
+			'proveedor': 'Proveedor',
+		}
+		widgets = {
+			'proveedor': forms.Select(attrs={'class': 'select2AddColaborador form-control', 'style':'width: 100%;'}),
+		}
