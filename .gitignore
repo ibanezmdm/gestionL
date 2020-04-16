@@ -153,3 +153,8 @@ media
 
 # Archivos de configuracion en produccion
 web.config
+
+# Archivos para manuales de usuario
+*.pptx
+*.docx
+*.pdf
