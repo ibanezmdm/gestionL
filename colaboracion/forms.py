@@ -20,7 +20,7 @@ class ContactoProveedorForm(forms.ModelForm):
 		widgets = {
 			'nombre': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
 			'apellido': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-			'email': forms.EmailInput(attrs={'class': 'form-control form-control-sm'}),
+			'email': forms.EmailInput(attrs={'class': 'form-control form-control-sm', 'readonly':'readonly'}),
 			'en_copia': forms.CheckboxInput(attrs={'class': 'form-control-sm'}),
 		}
 
