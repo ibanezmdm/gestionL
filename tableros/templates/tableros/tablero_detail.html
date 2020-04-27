@@ -1,0 +1,22 @@
+{% extends 'tableros/base.html' %}
+{% load static %}	
+
+{% block content %}
+{% if object %}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title"> <em> Tablero: </em>{{ object }}</h3>
+			</div>
+			<div class="card-body" style="text-align:center;">
+				<div style="margin:0px auto;">
+					{{ object.script|safe }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+<a href=" {% url 'tableros:index' %} ">Atrás</a>
+{% endblock content %}

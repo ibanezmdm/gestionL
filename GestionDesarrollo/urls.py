@@ -23,4 +23,5 @@ urlpatterns = [
     path('gestiondesarrollo/', include('frontend.urls')),
     path('colaboracion/', include('colaboracion.urls')),
     path('accounts/', include('registration.urls')),
+    path('tableros/', include('tableros.urls')),
 ]

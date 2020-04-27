@@ -44,6 +44,11 @@ class ContactoProveedorUpdateView(generic.UpdateView):
 			return reverse_lazy('colaboracion:proveedor', args=[self.kwargs['rut']])
 		else:
 			return reverse_lazy('colaboracion:index')
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['site_name'] = 'Gestion | Colaboracion'
+		return context
 
 
 def borraContactoDeProveedor(request, rut, email):
