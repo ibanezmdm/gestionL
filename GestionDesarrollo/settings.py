@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'proveedores.apps.ProveedoresConfig',
     'colaboracion.apps.ColaboracionConfig',
+    'tableros.apps.TablerosConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,35 @@
+{% extends 'tableros/base.html' %}
+{% load static %}	
+
+{% block content %}
+{% if categoria_list %}
+{% for categoria in categoria_list %}
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title"> <em> Categoria: </em>{{ categoria }}</h3>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					{% for tablero in categoria.tablero_set.all %}
+					<div class="col-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">{{ tablero }}</h5>	
+								<p class="card-text">
+									<a href=" {% url 'tableros:tablero' tablero.id %} ">Ir al tablero</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endblock content %}
