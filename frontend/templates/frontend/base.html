@@ -48,6 +48,9 @@
               <li>
                 <a href=" {% url 'colaboracion:index' %} " class="nav-link">Colaboración</a>
               </li>
+              <li>
+                <a href=" {% url 'tableros:index' %} " class="nav-link">Tableros</a>
+              </li>
             {% endblock navbar_left_links %}
             </ul>
           </div>
@@ -144,7 +147,19 @@
                   </a>
                 </div>
               </div>
-
+            </div>
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="small-box bg-gray">
+                  <div class="inner">
+                    <h3> Tableros </h3>
+                    <p> Informes Tableau </p>
+                  </div>
+                  <a href="{% url 'tableros:index' %}" class="small-box-footer">
+                    ir a la aplicacion <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
             </div>
           {% endblock content %}
           </div><!-- /.container-fluid -->
@@ -164,7 +179,7 @@
         </div>
         <!-- Default to the left -->
         {% block footer_left %}
-        <strong>Correo de soporte: <a href="mailto:desarrollo.logistico.tottus@falabella.cl"> secornejob@tottus.cl </a> </strong>
+        <strong>Correo de soporte: <a href="mailto:secornejob@tottus.cl;facontrerast@tottus.cl;cfreyes@tottus.cl?subject=Soporte portal gestión de información"> gestión de información </a> </strong>
         {% endblock footer_left %}
         {% endblock footer %}
       </footer>
