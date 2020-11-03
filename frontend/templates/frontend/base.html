@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="{% static 'img/tottus.ico' %}">
+    <link rel="icon" href="{% static 'img/LogoTottus.png' %}">
     
     {% block title_outer %}
     <title> {% block title %} {{ site_name }} {% endblock title %} </title>
@@ -23,7 +23,7 @@
 
   </head>
   <body 
-    {% block body_class %} class="hold-transition layout-navbar-fixed layout-footer-fixed layout-top-nav" {% endblock body_class %} 
+    {% block body_class %} class="hold-transition layout-navbar-fixed layout-footer-fixed layout-top-nav text-sm" {% endblock body_class %} 
     {% block body_style %} style="height: auto;" {% endblock body_style %}>
     <div class="wrapper">
 
@@ -32,15 +32,22 @@
       {% block navbar %}
         <div class="container-fluid">
 
-          {% block navbar_brad %}
-          <span class="navbar-brand">
+          {% comment %} {% block navbar_brad %}
+          <span class="navbar-brand-sm">
             <img src="{% static 'img/Tottus.png' %}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
           </span>
-          {% endblock navbar_brad %}
+          {% endblock navbar_brad %} {% endcomment %}
 
           <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
+              <li class="nav-item">
+                {% block navbar_brad %}
+                <a href="{% url 'gestiondesarrollo:index' %}" class="nav-link">
+                  <img class="brand-image" src="{% static 'img/Tottus.png' %}" alt>
+                </a>
+                {% endblock navbar_brad %}
+              </li>
             {% block navbar_left_links %}
               <li class="nav-item">
                 <a href=" {% url 'gestiondesarrollo:index' %} " class="nav-link">Home</a>
